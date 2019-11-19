@@ -1,4 +1,4 @@
-package com.j256.cloudwatchlogbackappender;
+package com.flo354.cloudwatchlogbackappender;
 
 /**
  * Set of common utility methods copied from the Net.

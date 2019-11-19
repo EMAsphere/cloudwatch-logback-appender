@@ -7,8 +7,8 @@ This package provides a logback appender that writes its log events to Cloudwatc
 there seem to be many projects like this out there but I could find none of them that were
 self-contained and that were published to the central Maven repo.
 
-* Code available from the [git repository](https://github.com/j256/cloudwatch-logback-appender).
-* Maven packages are published via [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.j256.cloudwatchlogbackappender/cloudwatchlogbackappender/badge.svg?style=flat-square)](https://maven-badges.herokuapp.com/maven-central/com.j256.cloudwatchlogbackappender/cloudwatchlogbackappender/)
+* Code available from the [git repository](https://github.com/Flo354/cloudwatch-logback-appender).
+* Forked from the [git repository](https://github.com/j256/cloudwatch-logback-appender).
 
 Enjoy, Gray Watson
 
@@ -17,29 +17,28 @@ Enjoy, Gray Watson
 ``` xml
 <dependencies>
 	<dependency>
-		<groupId>com.j256.cloudwatchlogbackappender</groupId>
+		<groupId>com.flo354.cloudwatchlogbackappender</groupId>
 		<artifactId>cloudwatchlogbackappender</artifactId>
-		<!-- NOTE: change the version to the most recent release version from the repo -->
-		<version>1.10</version>
+		<version>2.0.0</version>
 	</dependency>
 </dependencies>
 ```
 
 ## Dependencies
 
-By default the appender has dependencies on version 1.10.40 of the log (cloudwatch) and ec2 AWS SDK
+By default the appender has dependencies on version 2.10.19 of the log (cloudwatch) and ec2 AWS SDK
 packages.  You can add a exclusion for these packages if you want to depend on different versions.
 
 ``` xml
 <dependency>
 	<groupId>com.amazonaws</groupId>
 	<artifactId>aws-java-sdk-logs</artifactId>
-	<version>1.10.40</version>
+	<version>2.10.19</version>
 </dependency>
 <dependency>
 	<groupId>com.amazonaws</groupId>
 	<artifactId>aws-java-sdk-ec2</artifactId>
-	<version>1.10.40</version>
+	<version>2.10.19</version>
 </dependency>
 ```
 
@@ -48,7 +47,7 @@ packages.  You can add a exclusion for these packages if you want to depend on d
 Minimal logback appender configuration:
 
 ``` xml
-<appender name="CLOUDWATCH" class="com.j256.cloudwatchlogbackappender.CloudWatchAppender">
+<appender name="CLOUDWATCH" class="com.flo354.cloudwatchlogbackappender.CloudWatchAppender">
 	<region>us-east-1</region>
 	<logGroup>your-log-group-name-here</logGroup>
 	<logStream>your-log-stream-name-here</logStream>
@@ -76,9 +75,9 @@ and `%iid` for the instance-id as well.  If the instance-name is not available t
 name instead.
 
 ``` xml
-<appender name="CLOUDWATCH" class="com.j256.cloudwatchlogbackappender.CloudWatchAppender">
+<appender name="CLOUDWATCH" class="com.flo354.cloudwatchlogbackappender.CloudWatchAppender">
 	...
-	<layout class="com.j256.cloudwatchlogbackappender.Ec2PatternLayout">
+	<layout class="com.flo354.cloudwatchlogbackappender.Ec2PatternLayout">
 		<pattern>\[%instance\] \[%thread\] %level %logger{20} - %msg%n%xThrowable</pattern>
 	</layout>
 ```
@@ -90,8 +89,8 @@ Here is the complete list of the appender properties.
 | `region` | *string* | AWS region needed by CloudWatch API |
 | `logGroup` | *string* | Log group name |
 | `logStream` | *string* | Log stream name |
-| `accessKeyId` | *string* | **Default: none, code will use ```DefaultAWSCredentialsProviderChain```** <br /> AWS API access key ID, see AWS Permissions below |
-| `secretKey` | *string* | **Default: none, code will use ```DefaultAWSCredentialsProviderChain```** <br /> AWS API secret key, see AWS Permissions below |
+| `accessKeyId` | *string* | **Default: none, code will use ```DefaultCredentialsProvider```** <br /> AWS API access key ID, see AWS Permissions below |
+| `secretKey` | *string* | **Default: none, code will use ```DefaultCredentialsProvider```** <br /> AWS API secret key, see AWS Permissions below |
 | `maxBatchSize` | *int* | **Default: 128**<br/>Maximum number of log events put into CloudWatch in single request. |
 | `maxBatchTimeMillis` | *long* | **Default: 5000**<br/>Maximum time in milliseconds to collect log events to submit batch. |
 | `maxQueueWaitTimeMillis` | *long* | **Default: 100**<br/>Maximum time in milliseconds to wait if internal queue is full before using the emergency appender (see below). |
@@ -106,7 +105,7 @@ might result in log events not getting remoted correctly.  To protect against th
 appender to write events to the console or a file by adding the following to your CLOUDWATCH appender stanza:
 
 ``` xml
-<appender name="CLOUDWATCH" class="com.j256.cloudwatchlogbackappender.CloudWatchAppender">
+<appender name="CLOUDWATCH" class="com.flo354.cloudwatchlogbackappender.CloudWatchAppender">
 	...
 	<appender-ref ref="EMERGENCY_FILE" />
 ```
@@ -124,7 +123,7 @@ If no emergency appender is configured and a problem does happen then the log me
 You can specify the AWS CloudWatch permissions in a number of ways.  If you use the `accessKeyId` and `secretKey`
 settings in the `logback.xml` file then the appender will use those credentials directly.  You can also set the
 `cloudwatchappender.aws.accessKeyId` and `cloudwatchappender.aws.secretKey` Java System properties which will be
-used.  If neither of those are specified then the appender will use the `DefaultAWSCredentialsProviderChain` which
+used.  If neither of those are specified then the appender will use the `DefaultCredentialsProvider` which
 looks for the access and secret keys in:
 
 * Environment Variables: `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` or `AWS_ACCESS_KEY` and `AWS_SECRET_KEY`
@@ -166,7 +165,3 @@ if you want the appender to query for the ec2 instance name it is on – see `Ec
 
 I couldn't figure out how to restrict to all ec2 instances.  If you are only doing log requests then
 you should be able to limit it to the resource `arn:aws:logs:*:*:*`.
-
-# ChangeLog Release Notes
-
-See the [ChangeLog.txt file](src/main/javadoc/doc-files/changelog.txt).

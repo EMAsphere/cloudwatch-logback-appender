@@ -1,4 +1,4 @@
-package com.j256.cloudwatchlogbackappender;
+package com.flo354.cloudwatchlogbackappender;
 
 import ch.qos.logback.classic.PatternLayout;
 

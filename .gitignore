@@ -1,4 +1,7 @@
-/target/
 /.settings/
 /.classpath
 /.project
+
+.idea/libraries
+.idea/workspace.xml
+target
