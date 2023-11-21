@@ -7,7 +7,7 @@ This package provides a logback appender that writes its log events to Cloudwatc
 there seem to be many projects like this out there but I could find none of them that were
 self-contained and that were published to the central Maven repo.
 
-* Code available from the [git repository](https://github.com/Flo354/cloudwatch-logback-appender).
+* Code available from the [git repository](https://github.com/emasphere/cloudwatch-logback-appender).
 * Forked from the [git repository](https://github.com/j256/cloudwatch-logback-appender).
 
 Enjoy, Gray Watson
@@ -17,7 +17,7 @@ Enjoy, Gray Watson
 ``` xml
 <dependencies>
 	<dependency>
-		<groupId>com.flo354.cloudwatchlogbackappender</groupId>
+		<groupId>com.emasphere.cloudwatchlogbackappender</groupId>
 		<artifactId>cloudwatchlogbackappender</artifactId>
 		<version>2.0.0</version>
 	</dependency>
@@ -47,7 +47,7 @@ packages.  You can add a exclusion for these packages if you want to depend on d
 Minimal logback appender configuration:
 
 ``` xml
-<appender name="CLOUDWATCH" class="com.flo354.cloudwatchlogbackappender.CloudWatchAppender">
+<appender name="CLOUDWATCH" class="com.emasphere.cloudwatchlogbackappender.CloudWatchAppender">
 	<region>us-east-1</region>
 	<logGroup>your-log-group-name-here</logGroup>
 	<logStream>your-log-stream-name-here</logStream>
@@ -75,9 +75,9 @@ and `%iid` for the instance-id as well.  If the instance-name is not available t
 name instead.
 
 ``` xml
-<appender name="CLOUDWATCH" class="com.flo354.cloudwatchlogbackappender.CloudWatchAppender">
+<appender name="CLOUDWATCH" class="com.emasphere.cloudwatchlogbackappender.CloudWatchAppender">
 	...
-	<layout class="com.flo354.cloudwatchlogbackappender.Ec2PatternLayout">
+	<layout class="com.emasphere.cloudwatchlogbackappender.Ec2PatternLayout">
 		<pattern>\[%instance\] \[%thread\] %level %logger{20} - %msg%n%xThrowable</pattern>
 	</layout>
 ```
@@ -105,7 +105,7 @@ might result in log events not getting remoted correctly.  To protect against th
 appender to write events to the console or a file by adding the following to your CLOUDWATCH appender stanza:
 
 ``` xml
-<appender name="CLOUDWATCH" class="com.flo354.cloudwatchlogbackappender.CloudWatchAppender">
+<appender name="CLOUDWATCH" class="com.emasphere.cloudwatchlogbackappender.CloudWatchAppender">
 	...
 	<appender-ref ref="EMERGENCY_FILE" />
 ```

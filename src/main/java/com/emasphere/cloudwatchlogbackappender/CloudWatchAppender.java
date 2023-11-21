@@ -1,4 +1,4 @@
-package com.flo354.cloudwatchlogbackappender;
+package com.emasphere.cloudwatchlogbackappender;
 
 import java.util.*;
 import java.util.concurrent.ArrayBlockingQueue;

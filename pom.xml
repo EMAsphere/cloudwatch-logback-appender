@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.flo354.cloudwatchlogbackappender</groupId>
+	<groupId>com.emasphere.cloudwatchlogbackappender</groupId>
 	<artifactId>cloudwatchlogbackappender</artifactId>
 
-	<version>2.0.0</version>
+	<version>3.0.0</version>
 	<packaging>jar</packaging>
 
 	<name>Cloudwatch Logback Appender</name>
-	<url>https://github.com/Flo354/cloudwatch-logback-appender</url>
+	<url>https://github.com/emasphere/cloudwatch-logback-appender</url>
 	<description>Logback appender that publishes log events to AWS CloudWatch</description>
 
 	<licenses>
@@ -24,9 +24,9 @@
 	</properties>
 
 	<scm>
-		<url>https://github.com/Flo354/cloudwatch-logback-appender</url>
-		<connection>scm:git:ssh://git@github.com/Flo354/cloudwatch-logback-appender.git</connection>
-		<developerConnection>scm:git:ssh://git@github.com/Flo354/cloudwatch-logback-appender.git</developerConnection>
+		<url>https://github.com/emasphere/cloudwatch-logback-appender</url>
+		<connection>scm:git:ssh://git@github.com/emasphere/cloudwatch-logback-appender.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com/emasphere/cloudwatch-logback-appender.git</developerConnection>
 	</scm>
 
 	<developers>
@@ -43,7 +43,7 @@
 			<timezone>-5</timezone>
 		</developer>
 		<developer>
-			<id>Flo354</id>
+			<id>emasphere</id>
 			<name>Florian Pradines</name>
 			<url>http://florianpradines.com</url>
 			<timezone>+1</timezone>
