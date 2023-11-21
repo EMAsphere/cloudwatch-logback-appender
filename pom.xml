@@ -4,7 +4,7 @@
 	<groupId>com.emasphere.cloudwatchlogbackappender</groupId>
 	<artifactId>cloudwatchlogbackappender</artifactId>
 
-	<version>3.0.0</version>
+	<version>3.6.0</version>
 	<packaging>jar</packaging>
 
 	<name>Cloudwatch Logback Appender</name>
@@ -104,5 +104,23 @@
 			<artifactId>ec2</artifactId>
 			<version>2.10.19</version>
 		</dependency>
+		<dependency>
+			<groupId>software.amazon.awssdk</groupId>
+			<artifactId>sts</artifactId>
+			<version>2.10.19</version>
+		</dependency>
 	</dependencies>
+
+        <distributionManagement>
+            <snapshotRepository>
+                <id>emaNexus</id>
+                <name>Internal Snapshots</name>
+                <url>https://CHANGEMEWHENDEPLOY/repository/maven-snapshots/</url>
+            </snapshotRepository>
+            <repository>
+                <id>emaNexusRelease</id>
+                <name>Internal Releases</name>
+                <url>https://CHANGEMEWHENDEPLOY/repository/maven-releases/</url>
+            </repository>
+        </distributionManagement>
 </project>

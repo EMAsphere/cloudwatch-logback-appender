@@ -1,6 +1,8 @@
 Logback log appender for AWS CloudWatch
 =======================================
 
+This fork is using WebIdentity in order to get authorization to write logs on cloudwatch (EKS IAM SA, IRSA).
+
 # Background
 
 This package provides a logback appender that writes its log events to Cloudwatch.  Before you say it,

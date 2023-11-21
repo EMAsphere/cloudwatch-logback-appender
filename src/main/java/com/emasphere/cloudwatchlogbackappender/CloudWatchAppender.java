@@ -15,7 +15,7 @@ import ch.qos.logback.core.UnsynchronizedAppenderBase;
 import ch.qos.logback.core.spi.AppenderAttachable;
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
 import software.amazon.awssdk.auth.credentials.AwsCredentialsProvider;
-import software.amazon.awssdk.auth.credentials.DefaultCredentialsProvider;
+import software.amazon.awssdk.auth.credentials.WebIdentityTokenFileCredentialsProvider;
 import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
 import software.amazon.awssdk.awscore.exception.AwsServiceException;
 import software.amazon.awssdk.regions.Region;
@@ -64,10 +64,10 @@ public class CloudWatchAppender extends UnsynchronizedAppenderBase<ILoggingEvent
 	private static final String AWS_SECRET_KEY_PROPERTY = "cloudwatchappender.aws.secretKey";
 
 	private String accessKeyId;
-	private String secretKey;
-	private String region;
 	private String logGroupName;
 	private String logStreamName;
+	private String region;
+	private String secretKey;
 	private Layout<ILoggingEvent> layout;
 	private Appender<ILoggingEvent> emergencyAppender;
 	private int maxBatchSize = DEFAULT_MAX_BATCH_SIZE;
@@ -486,12 +486,10 @@ public class CloudWatchAppender extends UnsynchronizedAppenderBase<ILoggingEvent
 				secretKey = System.getProperty(AWS_SECRET_KEY_PROPERTY);
 			}
 
-			if (MiscUtils.isBlank(accessKeyId)) {
-				// if we are still blank then use the default credentials provider
-				credentialProvider = DefaultCredentialsProvider.create();
-			} else {
-				credentialProvider = StaticCredentialsProvider.create(AwsBasicCredentials.create(accessKeyId, secretKey));
-			}
+			// We are forcing the WebIdentityTokenFileCredentialsProvider
+			logInfo("Using WebIdentityTokenFileCredentialsProvider");
+			credentialProvider = WebIdentityTokenFileCredentialsProvider.create();
+
 			awsLogsClient = CloudWatchLogsClient.builder()
 					.credentialsProvider(credentialProvider)
 					.region(Region.of(region))
