@@ -43,9 +43,19 @@
 			<timezone>-5</timezone>
 		</developer>
 		<developer>
-			<id>emasphere</id>
+			<id>flo354</id>
 			<name>Florian Pradines</name>
 			<url>http://florianpradines.com</url>
+			<timezone>+1</timezone>
+		</developer>
+		<developer>
+			<id>Emasphere NLE</id>
+			<name>Nicolas Lejeune</name>
+			<timezone>+1</timezone>
+		</developer>
+		<developer>
+			<id>Emasphere TGE</id>
+			<name>Thibault Gerondal</name>
 			<timezone>+1</timezone>
 		</developer>
 	</developers>
